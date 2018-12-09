@@ -1,7 +1,7 @@
 {
   "app-id": "org.geany.Geany",
   "runtime": "org.gnome.Sdk",
-  "runtime-version": "3.26",
+  "runtime-version": "3.30",
   "branch": "stable",
   "sdk": "org.gnome.Sdk",
   "command": "geany",
@@ -11,11 +11,14 @@
      "--share=ipc",
      "--socket=x11",
      "--share=network",
-     "--filesystem=home"
+     "--filesystem=host"
   ],
   "modules": [
     {
       "name": "geany",
+      "config-opts": [
+        "--enable-gtk3"
+      ],
       "sources": [
         {
           "type": "archive",
@@ -28,8 +31,7 @@
         }
       ],
       "post-install": [
-        "mkdir -p /app/share/appdata",
-        "cp org.geany.Geany.appdata.xml /app/share/appdata/org.geany.Geany.appdata.xml"
+        "install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml"
       ]
     }
   ]
