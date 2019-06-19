@@ -22,8 +22,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "http://download.geany.org/geany-1.33.tar.gz",
-          "sha256": "e59ba42a6eeb2d335160e304c5875f8ae54db4f97bc7744e34f9ad0cf3d0779f"
+          "url": "https://download.geany.org/geany-1.35.tar.gz",
+          "sha256": "7a1896488e65058232ee0d5c3464d8a4ace7683ac812911740c688355d08a3af"
         },
         {
           "type": "file",
