@@ -24,7 +24,6 @@
         {
           "type": "archive",
           "url": "https://download.geany.org/geany-1.36.tar.bz2",
-          "sha256": "9184dd3dd40b7b84fca70083284bb9dbf2ee8022bf2be066bdc36592d909d53e",
           "sha512": "15005772b64e8321d7fa8552363df425eb25e9d7b0760c561c8fb3f34d7acae2bf25da8e04fda38a2a1b64cc31ff613b7ff2786d432ff014050c138c7473c810"
         },
         {
