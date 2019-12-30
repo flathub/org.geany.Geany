@@ -28,13 +28,13 @@ as possible from a specific Desktop Environment like KDE or GNOME.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image height="808" width="942">http://www.geany.org/uploads/Gallery/geany_main.png</image>
+      <image width="1366" height="741">http://www.geany.org/uploads/Gallery/geany_main.png</image>
     </screenshot>
     <screenshot>
-      <image height="808" width="942">http://www.geany.org/uploads/Gallery/geany_build.png</image>
+      <image width="1366" height="741">http://www.geany.org/uploads/Gallery/geany_build.png</image>
     </screenshot>
     <screenshot>
-      <image height="808" width="942">http://www.geany.org/uploads/Gallery/geany_vte.png</image>
+      <image width="1366" height="741">http://www.geany.org/uploads/Gallery/geany_vte.png</image>
     </screenshot>
   </screenshots>
   <update_contact>https://github.com/geany/geany</update_contact>
