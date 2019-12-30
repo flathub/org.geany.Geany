@@ -1,7 +1,7 @@
 {
   "app-id": "org.geany.Geany",
   "runtime": "org.gnome.Sdk",
-  "runtime-version": "3.30",
+  "runtime-version": "3.34",
   "branch": "stable",
   "sdk": "org.gnome.Sdk",
   "command": "geany",
@@ -14,6 +14,7 @@
      "--filesystem=host"
   ],
   "modules": [
+    "shared-modules/intltool/intltool-0.51.json",
     {
       "name": "geany",
       "config-opts": [
@@ -22,8 +23,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.geany.org/geany-1.35.tar.gz",
-          "sha256": "7a1896488e65058232ee0d5c3464d8a4ace7683ac812911740c688355d08a3af"
+          "url": "https://download.geany.org/geany-1.36.tar.bz2",
+          "sha512": "15005772b64e8321d7fa8552363df425eb25e9d7b0760c561c8fb3f34d7acae2bf25da8e04fda38a2a1b64cc31ff613b7ff2786d432ff014050c138c7473c810"
         },
         {
           "type": "file",
