@@ -35,6 +35,70 @@
       "post-install": [
         "install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml"
       ]
+    },
+    {
+      "name" : "libgit2",
+      "buildsystem" : "cmake",
+      "config-opts" : [
+        "-DBUILD_SHARED_LIBS:BOOL=ON",
+        "-DTHREADSAFE=ON"
+      ],
+      "sources" : [
+        {
+          "type" : "git",
+          "url" : "https://github.com/libgit2/libgit2.git",
+          "branch" : "maint/v0.28"
+        }
+      ]
+    },
+    {
+      "name" : "ctpl",
+      "sources" : [
+        {
+          "type": "archive",
+          "url": "http://download.tuxfamily.org/ctpl/releases/ctpl-0.3.4.tar.gz",
+          "sha256": "3a95fdd03437ed3ae222339cb0de2d2c1240d627faa6c77bf46f1a9b761729fb"
+        }
+      ]
+    },
+    {
+      "name" : "libmarkdown",
+      "no-parallel-make" : true,
+      "config-opts": [
+        "--shared",
+        "--pkg-config",
+        "--debian-glitch"
+      ],
+      "sources" : [
+        {
+          "type" : "git",
+          "url" : "https://github.com/Orc/discount.git",
+          "branch" : "v2.2.6"
+        },
+        {
+          "type" : "shell",
+          "commands" : [
+            "mv configure.sh configure"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "geany-plugins",
+      "config-opts": [
+        "--disable-cppcheck",
+        "--disable-extra-c-warnings",
+        "--disable-peg-markdown"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://plugins.geany.org/geany-plugins/geany-plugins-1.36.tar.gz",
+          "sha1": "99a6117645a665cefe6f6861f2a2feb0137d3e75",
+          "sha256": "9f79847c2dd979dbd392819090d6cbf170a6d4fee1888f98e27c65dc2d870bbe",
+          "sha512": "b3e58b42432d17c27289fa20d10b833a2d7f5d8c72b51abe5b1ebdabcb952b18e0984b15ef6ac9753102d839f3174f28798269e1e94bf032bdaa189e98d72b2d"
+        }
+      ]
     }
   ]
 }
