@@ -1,7 +1,7 @@
 {
   "app-id": "org.geany.Geany",
   "runtime": "org.gnome.Sdk",
-  "runtime-version": "3.34",
+  "runtime-version": "3.36",
   "branch": "stable",
   "sdk": "org.gnome.Sdk",
   "command": "geany",
