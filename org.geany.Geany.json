@@ -1,7 +1,7 @@
 {
   "app-id": "org.geany.Geany",
   "runtime": "org.gnome.Sdk",
-  "runtime-version": "3.36",
+  "runtime-version": "3.38",
   "branch": "stable",
   "sdk": "org.gnome.Sdk",
   "command": "geany",
@@ -10,6 +10,8 @@
   "finish-args": [
      "--share=ipc",
      "--socket=x11",
+     "--socket=fallback-x11",
+     "--socket=wayland",
      "--share=network",
      "--filesystem=host",
      "--filesystem=xdg-run/geany:create"
@@ -24,8 +26,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.geany.org/geany-1.36.tar.bz2",
-          "sha512": "15005772b64e8321d7fa8552363df425eb25e9d7b0760c561c8fb3f34d7acae2bf25da8e04fda38a2a1b64cc31ff613b7ff2786d432ff014050c138c7473c810"
+          "url": "https://download.geany.org/geany-1.37.1.tar.bz2",
+          "sha512": "9dafaa540ba4d37ae66f3cc1c4d9670aa8ea30e74e960f0ad010dcbcd1647d1dc2eea4ae7454f589fc6ec0ded0da2de98d85fecc92d8d1ff36cd62d3255a47f4"
         },
         {
           "type": "file",

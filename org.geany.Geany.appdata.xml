@@ -40,6 +40,7 @@ as possible from a specific Desktop Environment like KDE or GNOME.</p>
   <update_contact>https://github.com/geany/geany</update_contact>
   <translation type="gettext">geany</translation>
   <releases>
+    <release date="2020-11-08" version="1.37.1"/>
     <release date="2019-09-28" version="1.36"/>
     <release date="2019-04-28" version="1.35"/>
   </releases>
