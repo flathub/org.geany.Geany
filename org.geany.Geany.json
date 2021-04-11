@@ -6,6 +6,7 @@
   "sdk": "org.gnome.Sdk",
   "command": "geany",
   "rename-icon": "geany",
+  "copy-icon": true,
   "rename-desktop-file": "geany.desktop",
   "finish-args": [
      "--share=ipc",
@@ -42,7 +43,7 @@
     {
       "name": "geany",
       "config-opts": [
-        "--enable-gtk3"
+        "--disable-api-docs"
       ],
       "sources": [
         {
@@ -58,6 +59,12 @@
         {
           "type": "file",
           "path": "org.geany.Geany.appdata.xml"
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "sed -i 's/firefox/xdg-open/' src/keyfile.c"
+          ]
         }
       ],
       "post-install": [
