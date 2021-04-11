@@ -19,6 +19,23 @@
   "modules": [
     "shared-modules/intltool/intltool-0.51.json",
     {
+      "name" : "vte",
+      "buildsystem" : "meson",
+      "config-opts": [
+        "-Ddocs=false",
+        "-Dvapi=false",
+        "-Dgir=false"
+      ],
+      "sources" : [
+        {
+          "type": "git",
+          "url": "https://gitlab.gnome.org/GNOME/vte.git",
+          "tag": "0.64.0",
+          "commit": "2520d6b6785646ceb5f501f9c37a1a0307fa4486"
+        }
+      ]
+    },
+    {
       "name": "geany",
       "config-opts": [
         "--enable-gtk3"
