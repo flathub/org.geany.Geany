@@ -31,7 +31,11 @@
           "type": "git",
           "url": "https://gitlab.gnome.org/GNOME/vte.git",
           "tag": "0.64.0",
-          "commit": "2520d6b6785646ceb5f501f9c37a1a0307fa4486"
+          "commit": "2520d6b6785646ceb5f501f9c37a1a0307fa4486",
+          "x-checker-data": {
+            "type": "git",
+            "tag-pattern": "^([\\d.]+)$"
+          }
         }
       ]
     },
@@ -44,7 +48,12 @@
         {
           "type": "archive",
           "url": "https://download.geany.org/geany-1.37.1.tar.bz2",
-          "sha512": "9dafaa540ba4d37ae66f3cc1c4d9670aa8ea30e74e960f0ad010dcbcd1647d1dc2eea4ae7454f589fc6ec0ded0da2de98d85fecc92d8d1ff36cd62d3255a47f4"
+          "sha512": "9dafaa540ba4d37ae66f3cc1c4d9670aa8ea30e74e960f0ad010dcbcd1647d1dc2eea4ae7454f589fc6ec0ded0da2de98d85fecc92d8d1ff36cd62d3255a47f4",
+          "x-checker-data": {
+            "type": "html",
+            "url": "https://www.geany.org/download/releases",
+            "pattern": "(https://download.geany.org/geany-([\\d\\.]+).tar.bz2)"
+          }
         },
         {
           "type": "file",
