@@ -1,75 +1,76 @@
 {
-  "app-id": "org.geany.Geany",
-  "runtime": "org.gnome.Sdk",
-  "runtime-version": "40",
-  "branch": "stable",
-  "sdk": "org.gnome.Sdk",
-  "command": "geany",
-  "rename-icon": "geany",
-  "copy-icon": true,
-  "rename-desktop-file": "geany.desktop",
-  "finish-args": [
-     "--share=ipc",
-     "--socket=x11",
-     "--socket=fallback-x11",
-     "--socket=wayland",
-     "--share=network",
-     "--filesystem=host",
-     "--filesystem=xdg-run/geany:create"
-  ],
-  "modules": [
-    "shared-modules/intltool/intltool-0.51.json",
-    {
-      "name" : "vte",
-      "buildsystem" : "meson",
-      "config-opts": [
-        "-Ddocs=false",
-        "-Dvapi=false",
-        "-Dgir=false"
-      ],
-      "sources" : [
+    "app-id": "org.geany.Geany",
+    "runtime": "org.gnome.Sdk",
+    "runtime-version": "40",
+    "branch": "stable",
+    "sdk": "org.gnome.Sdk",
+    "command": "geany",
+    "rename-icon": "geany",
+    "copy-icon": true,
+    "rename-desktop-file": "geany.desktop",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--share=network",
+        "--filesystem=host",
+        "--filesystem=xdg-run/geany:create"
+    ],
+    "modules": [
+        "shared-modules/intltool/intltool-0.51.json",
         {
-          "type": "git",
-          "url": "https://gitlab.gnome.org/GNOME/vte.git",
-          "tag": "0.64.0",
-          "commit": "2520d6b6785646ceb5f501f9c37a1a0307fa4486",
-          "x-checker-data": {
-            "type": "git",
-            "tag-pattern": "^([\\d.]+)$"
-          }
-        }
-      ]
-    },
-    {
-      "name": "geany",
-      "config-opts": [
-        "--disable-api-docs"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://download.geany.org/geany-1.37.1.tar.bz2",
-          "sha512": "9dafaa540ba4d37ae66f3cc1c4d9670aa8ea30e74e960f0ad010dcbcd1647d1dc2eea4ae7454f589fc6ec0ded0da2de98d85fecc92d8d1ff36cd62d3255a47f4",
-          "x-checker-data": {
-            "type": "html",
-            "url": "https://www.geany.org/download/releases",
-            "pattern": "(https://download.geany.org/geany-([\\d\\.]+).tar.bz2)"
-          }
+            "name": "vte",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Ddocs=false",
+                "-Dvapi=false",
+                "-Dgir=false"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/vte.git",
+                    "tag": "0.65.90",
+                    "commit": "15ca4f9a4ff16ee325077d8349c9189b8c171efc",
+                    "x-checker-data": {
+                        "type": "git",
+                        "tag-pattern": "^([\\d.]+)$"
+                    }
+                }
+            ]
         },
         {
-          "type": "file",
-          "path": "org.geany.Geany.appdata.xml"
-        },
-        {
-          "type": "shell",
-          "commands": [
-            "sed -i 's/firefox/xdg-open/' src/keyfile.c"
-          ]
+            "name": "geany",
+            "config-opts": [
+                "--disable-api-docs"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.geany.org/geany-1.37.1.tar.bz2",
+                    "sha512": "9dafaa540ba4d37ae66f3cc1c4d9670aa8ea30e74e960f0ad010dcbcd1647d1dc2eea4ae7454f589fc6ec0ded0da2de98d85fecc92d8d1ff36cd62d3255a47f4",
+                    "x-checker-data": {
+                        "type": "html",
+                        "url": "https://www.geany.org/download/releases",
+                        "pattern": "(https://download.geany.org/geany-([\\d\\.]+).tar.bz2)"
+                    },
+                    "sha256": "18c5756444c1d8bcd737c8ecfd4ef0b3607c924fc02560d4e8b78f6121531a18"
+                },
+                {
+                    "type": "file",
+                    "path": "org.geany.Geany.appdata.xml"
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "sed -i 's/firefox/xdg-open/' src/keyfile.c"
+                    ]
+                }
+            ],
+            "post-install": [
+                "install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml"
+            ]
         }
-      ],
-      "post-install": [
-        "install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml"
-      ]
-    }
-  ]
+    ]
 }
