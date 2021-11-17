@@ -49,7 +49,7 @@
         {
           "type": "archive",
           "url": "https://download.geany.org/geany-1.38.tar.bz2",
-          "sha512": "5aff0643d0d9e667d0fb526e9c8426cb80c89decf92110683086c2a7a18e0d3d55ab514fdd68aa0c4431c98ae0c4685607b49c620525184c89e21b26fca06699",
+          "sha256": "abff176e4d48bea35ee53037c49c82f90b6d4c23e69aed6e4a5ca8ccd3aad546",
           "x-checker-data": {
             "type": "html",
             "url": "https://www.geany.org/download/releases",
