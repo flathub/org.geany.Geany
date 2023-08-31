@@ -32,6 +32,8 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
+          versions:
+            <: '0.73'
   - name: geany
     config-opts:
       - --disable-api-docs
