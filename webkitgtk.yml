@@ -17,6 +17,7 @@ config-opts:
   - -DENABLE_SPELLCHECK=OFF
   - -DENABLE_DOCUMENTATION=OFF
   - -DENABLE_MINIBROWSER=OFF
+  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF # Unused inside of flatpak
 sources:
   - type: archive
     url: https://webkitgtk.org/releases/webkitgtk-2.42.1.tar.xz
@@ -33,34 +34,6 @@ sources:
       - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@'
         Source/cmake/FindAVIF.cmake
 modules:
-
-  # Geany exposes the host file system, so WebkitGTK **NEEDS** to be sandboxed.
-  - name: bubblewrap
-    buildsystem: meson
-    sources:
-      - type: archive
-        url: https://github.com/containers/bubblewrap/releases/download/v0.8.0/bubblewrap-0.8.0.tar.xz
-        sha256: 957ad1149db9033db88e988b12bcebe349a445e1efc8a9b59ad2939a113d333a
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/containers/bubblewrap/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag | sub("^v"; "")
-          url-query: '"https://github.com/containers/bubblewrap/releases/download/\($tag)/bubblewrap-\($version).tar.xz"'
-  - name: xdg-dbus-proxy
-    buildsystem: meson
-    sources:
-      - type: archive
-        url: https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.4/xdg-dbus-proxy-0.1.4.tar.xz
-        sha256: 1ec0eab53d1e49966d722352bcfd51ac402dce5190baedc749a8541e761670ab
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/flatpak/xdg-dbus-proxy/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag
-          url-query: '"https://github.com/flatpak/xdg-dbus-proxy/releases/download/\($tag)/xdg-dbus-proxy-\($version).tar.xz"'
 
   # The rest of WebkitGTK's deps.
   - name: unifdef
