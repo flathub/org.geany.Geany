@@ -52,3 +52,6 @@ modules:
           - sed -i 's/firefox/xdg-open/' src/keyfile.c
     post-install:
       - install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml
+
+# If you want to build Geany without plugins, just remove the line below.
+  - geany-plugins.yml

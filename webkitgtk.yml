@@ -1,0 +1,181 @@
+# And now, WebkitGTK and its deps *specifically.*
+# Big thanks to Telegram Desktop Webview's manifest maintainers for this.
+# Because I took pretty much the whole stupid thing and refactored it into its
+# own yml file. I then added many extra parts from all over the Flathub org.
+# Anyone who needs to include webkitgtk, *please* feel free to use this.
+
+name: webkitgtk
+buildsystem: cmake-ninja
+config-opts:
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  - -DPORT=GTK
+  - -DUSE_SOUP2=ON  # This makes it build webkit2gtk-4.0 instead of 4.1.
+  - -DUSE_LIBSECRET=OFF
+  - -DUSE_WOFF2=OFF
+  - -DENABLE_GAMEPAD=OFF
+  - -DENABLE_INTROSPECTION=OFF
+  - -DENABLE_SPELLCHECK=OFF
+  - -DENABLE_DOCUMENTATION=OFF
+  - -DENABLE_MINIBROWSER=OFF
+sources:
+  - type: archive
+    url: https://webkitgtk.org/releases/webkitgtk-2.42.1.tar.xz
+    sha256: 6f41fac9989d3ee51c08c48de1d439cdeddecbc757e34b6180987d99b16d2499
+    x-checker-data:
+      type: html
+      url: https://webkitgtk.org/releases/
+      version-pattern: LATEST-STABLE-(\d[\.\d]+\d)
+      url-template: https://webkitgtk.org/releases/webkitgtk-$version.tar.xz
+  - type: shell
+    commands:
+      - sed -i 's@NAMES avif.h@NAMES avif/avif.h@' Source/cmake/FindAVIF.cmake
+      - sed -i '/PATH_SUFFIXES avif/d' Source/cmake/FindAVIF.cmake
+      - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@'
+        Source/cmake/FindAVIF.cmake
+modules:
+
+  # Geany exposes the host file system, so WebkitGTK **NEEDS** to be sandboxed.
+  - name: bubblewrap
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://github.com/containers/bubblewrap/releases/download/v0.8.0/bubblewrap-0.8.0.tar.xz
+        sha256: 957ad1149db9033db88e988b12bcebe349a445e1efc8a9b59ad2939a113d333a
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/containers/bubblewrap/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag | sub("^v"; "")
+          url-query: '"https://github.com/containers/bubblewrap/releases/download/\($tag)/bubblewrap-\($version).tar.xz"'
+  - name: xdg-dbus-proxy
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.4/xdg-dbus-proxy-0.1.4.tar.xz
+        sha256: 1ec0eab53d1e49966d722352bcfd51ac402dce5190baedc749a8541e761670ab
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/flatpak/xdg-dbus-proxy/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag
+          url-query: '"https://github.com/flatpak/xdg-dbus-proxy/releases/download/\($tag)/xdg-dbus-proxy-\($version).tar.xz"'
+
+  # The rest of WebkitGTK's deps.
+  - name: unifdef
+    no-autogen: true
+    make-install-args:
+      - prefix=${FLATPAK_DEST}
+    sources:
+      - type: archive
+        url: https://dotat.at/prog/unifdef/unifdef-2.12.tar.xz
+        sha256: 43ce0f02ecdcdc723b2475575563ddb192e988c886d368260bc0a63aee3ac400
+        x-checker-data:
+          type: anitya
+          project-id: 5046
+          url-template: https://dotat.at/prog/unifdef/unifdef-$version.tar.xz
+    cleanup:
+      - '*'
+  - name: highway
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_SHARED_LIBS=ON
+      - -DBUILD_TESTING=OFF
+      - -DHWY_ENABLE_CONTRIB=OFF
+      - -DHWY_ENABLE_EXAMPLES=OFF
+    sources:
+      - type: archive
+        url: https://github.com/google/highway/archive/1.0.7/highway-1.0.7.tar.gz
+        sha256: 5434488108186c170a5e2fca5e3c9b6ef59a1caa4d520b008a9b8be6b8abe6c5
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/google/highway/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag
+          url-query: '"https://github.com/google/highway/archive/\($tag)/highway-\($version).tar.gz"'
+    cleanup:
+      - '*'
+  - name: libavif
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DAVIF_CODEC_DAV1D=ON
+    sources:
+      - type: archive
+        url: https://github.com/AOMediaCodec/libavif/archive/v1.0.1/libavif-1.0.1.tar.gz
+        sha256: 398fe7039ce35db80fe7da8d116035924f2c02ea4a4aa9f4903df6699287599c
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/AOMediaCodec/libavif/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag | sub("^[vV]"; "")
+          url-query: '"https://github.com/AOMediaCodec/libavif/archive/\($tag)/libavif-\($version).tar.gz"'
+    cleanup:
+      - '*'
+  - name: libjxl
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DJPEGXL_ENABLE_DEVTOOLS=OFF
+      - -DJPEGXL_ENABLE_TOOLS=OFF
+      - -DJPEGXL_ENABLE_DOXYGEN=OFF
+      - -DJPEGXL_ENABLE_MANPAGES=OFF
+      - -DJPEGXL_ENABLE_BENCHMARK=OFF
+      - -DJPEGXL_ENABLE_EXAMPLES=OFF
+      - -DJPEGXL_ENABLE_JNI=OFF
+      - -DJPEGXL_ENABLE_SJPEG=OFF
+      - -DJPEGXL_ENABLE_OPENEXR=OFF
+      - -DJPEGXL_ENABLE_SKCMS=OFF
+    sources:
+      - type: archive
+        url: https://github.com/libjxl/libjxl/archive/v0.8.2/libjxl-0.8.2.tar.gz
+        sha256: c70916fb3ed43784eb840f82f05d390053a558e2da106e40863919238fa7b420
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/libjxl/libjxl/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag | sub("^[vV]"; "")
+          url-query: '"https://github.com/libjxl/libjxl/archive/\($tag)/libjxl-\($version).tar.gz"'
+    cleanup:
+      - '*'
+  - name: libwpe
+    buildsystem: meson
+    builddir: true
+    config-opts:
+      - --buildtype=plain
+    sources:
+      - type: archive
+        url: https://github.com/WebPlatformForEmbedded/libwpe/releases/download/1.14.1/libwpe-1.14.1.tar.xz
+        sha256: b1d0cdcf0f8dbb494e65b0f7913e357106da9a0d57f4fbb7b9d1238a6dbe9ade
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/WebPlatformForEmbedded/libwpe/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag
+          url-query: '"https://github.com/WebPlatformForEmbedded/libwpe/releases/download/\($tag)/libwpe-\($version).tar.xz"'
+  - name: wpebackend-fdo
+    buildsystem: meson
+    builddir: true
+    config-opts:
+      - --buildtype=plain
+    sources:
+      - type: archive
+        url: https://github.com/Igalia/WPEBackend-fdo/releases/download/1.14.2/wpebackend-fdo-1.14.2.tar.xz
+        sha256: 93c9766ae9864eeaeaee2b0a74f22cbca08df42c1a1bdb55b086f2528e380d38
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Igalia/WPEBackend-fdo/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
+          version-query: $tag
+          url-query: '"https://github.com/Igalia/WPEBackend-fdo/releases/download/\($tag)/wpebackend-fdo-\($version).tar.xz"'

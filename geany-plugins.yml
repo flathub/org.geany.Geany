@@ -1,0 +1,60 @@
+# Geany-Plugins and dependencies below here.
+# A lot of these snippets are borrowed from all over the Flathub github org.
+
+name: geany-plugins
+config-opts:
+  - --enable-webhelper
+  - --enable-markdown
+sources:
+  - type: archive
+    url: https://plugins.geany.org/geany-plugins/geany-plugins-2.0.tar.bz2
+    sha256: 9fc2ec5c99a74678fb9e8cdfbd245d3e2061a448d70fd110a6aefb62dd514705
+    x-checker-data:
+      type: html
+      url: https://www.geany.org/download/releases
+      pattern: (https://plugins.geany.org/geany-plugins/geany-plugins-([\d\.]+).tar.bz2)
+modules:
+  - shared-modules/lua5.4/lua-5.4.json
+  - shared-modules/libsoup/libsoup-2.4.json
+  - name: libgit2
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_INSTALL_PREFIX=/app
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DUSE_HTTPS=OFF
+      - -DUSE_SSH=OFF
+      - -DREGEX_BACKEND=regcomp
+      - -DBUILD_TESTS=OFF
+      - -DBUILD_CLI=OFF
+    sources:
+      - type: archive
+        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.7.1.tar.gz
+        sha256: 17d2b292f21be3892b704dddff29327b3564f96099a1c53b00edc23160c71327
+        x-checker-data:
+          type: anitya
+          project-id: 1627
+          url-template: https://github.com/libgit2/libgit2/archive/refs/tags/v$version.tar.gz
+  - name: ctpl
+    sources:
+      - type: archive
+        url: http://download.tuxfamily.org/ctpl/releases/ctpl-0.3.3.tar.gz
+        sha256: 7da73e7d8f10d222f5685b8eb80541d7e4d342aa74673039692fa5c4e8b120a7
+      # The included config.guess fails on aarch64.
+      - type: shell
+        commands:
+          - cp -p /usr/share/automake-*/config.{sub,guess} build/aux/
+  - name: enchant
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/AbiWord/enchant/releases/download/v2.6.1/enchant-2.6.1.tar.gz
+        sha256: f24e12469137ae1d03140bb9032a47a5947c36f4d1e2f12b929061005eb15279
+        x-checker-data:
+          type: anitya
+          project-id: 6601
+          url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
+
+# I split WebkitGTK off into its own file because it has so many deps and
+# everything about it is a massive pain.
+  - webkitgtk.yml
