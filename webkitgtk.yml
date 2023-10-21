@@ -30,8 +30,7 @@ sources:
     commands:
       - sed -i 's@NAMES avif.h@NAMES avif/avif.h@' Source/cmake/FindAVIF.cmake
       - sed -i '/PATH_SUFFIXES avif/d' Source/cmake/FindAVIF.cmake
-      - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@'
-        Source/cmake/FindAVIF.cmake
+      - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@' Source/cmake/FindAVIF.cmake
 modules:
 
   # Geany exposes the host file system, so WebkitGTK **NEEDS** to be sandboxed.
@@ -52,8 +51,8 @@ modules:
     buildsystem: meson
     sources:
       - type: archive
-        url: https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.4/xdg-dbus-proxy-0.1.4.tar.xz
-        sha256: 1ec0eab53d1e49966d722352bcfd51ac402dce5190baedc749a8541e761670ab
+        url: https://github.com/flatpak/xdg-dbus-proxy/releases/download/0.1.5/xdg-dbus-proxy-0.1.5.tar.xz
+        sha256: 061dcfaf8a0650e5fd9d5432dfe88bda749ea0d079dc136304bfecfbce0661fb
         x-checker-data:
           type: json
           url: https://api.github.com/repos/flatpak/xdg-dbus-proxy/releases/latest
