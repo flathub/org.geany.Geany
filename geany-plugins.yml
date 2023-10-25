@@ -3,8 +3,7 @@
 
 name: geany-plugins
 config-opts:
-  - --enable-webhelper
-  - --enable-markdown
+  - --enable-all-plugins
 sources:
   - type: archive
     url: https://plugins.geany.org/geany-plugins/geany-plugins-2.0.tar.bz2
