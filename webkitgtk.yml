@@ -4,7 +4,7 @@
 # own yml file. I then added many extra parts from all over the Flathub org.
 # Anyone who needs to include webkitgtk, *please* feel free to use this.
 
-name: webkitgtk
+name: webkit2gtk-4.0
 buildsystem: cmake-ninja
 config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
@@ -17,7 +17,7 @@ config-opts:
   - -DENABLE_SPELLCHECK=OFF
   - -DENABLE_DOCUMENTATION=OFF
   - -DENABLE_MINIBROWSER=OFF
-  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF # Unused inside of flatpak
+  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
     url: https://webkitgtk.org/releases/webkitgtk-2.42.1.tar.xz
@@ -34,8 +34,6 @@ sources:
       - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@'
         Source/cmake/FindAVIF.cmake
 modules:
-
-  # The rest of WebkitGTK's deps.
   - name: unifdef
     no-autogen: true
     make-install-args:
