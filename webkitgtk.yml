@@ -11,7 +11,6 @@ config-opts:
   - -DPORT=GTK
   - -DUSE_SOUP2=ON  # This makes it build webkit2gtk-4.0 instead of 4.1.
   - -DUSE_LIBSECRET=OFF
-  - -DUSE_WOFF2=OFF
   - -DENABLE_GAMEPAD=OFF
   - -DENABLE_INTROSPECTION=OFF
   - -DENABLE_SPELLCHECK=OFF
@@ -68,6 +67,17 @@ modules:
           timestamp-query: .published_at
           version-query: $tag
           url-query: '"https://github.com/google/highway/archive/\($tag)/highway-\($version).tar.gz"'
+  - name: woff2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/google/woff2/archive/v1.0.2.tar.gz
+        sha256: add272bb09e6384a4833ffca4896350fdb16e0ca22df68c0384773c67a175594
+        x-checker-data:
+          type: anitya
+          project-id: 17587
+          url-template: https://github.com/google/woff2/archive/v$version.tar.gz
   - name: libavif
     buildsystem: cmake-ninja
     builddir: true
