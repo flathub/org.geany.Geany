@@ -47,9 +47,6 @@ modules:
           pattern: (https://download.geany.org/geany-([\d\.]+).tar.bz2)
       - type: file
         path: org.geany.Geany.appdata.xml
-      - type: shell
-        commands:
-          - sed -i 's/firefox/xdg-open/' src/keyfile.c
     post-install:
       - install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml
 

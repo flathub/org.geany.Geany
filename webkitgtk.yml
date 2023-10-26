@@ -4,20 +4,19 @@
 # own yml file. I then added many extra parts from all over the Flathub org.
 # Anyone who needs to include webkitgtk, *please* feel free to use this.
 
-name: webkitgtk
+name: webkit2gtk-4.0
 buildsystem: cmake-ninja
 config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DPORT=GTK
   - -DUSE_SOUP2=ON  # This makes it build webkit2gtk-4.0 instead of 4.1.
   - -DUSE_LIBSECRET=OFF
-  - -DUSE_WOFF2=OFF
   - -DENABLE_GAMEPAD=OFF
   - -DENABLE_INTROSPECTION=OFF
   - -DENABLE_SPELLCHECK=OFF
   - -DENABLE_DOCUMENTATION=OFF
   - -DENABLE_MINIBROWSER=OFF
-  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF # Unused inside of flatpak
+  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
     url: https://webkitgtk.org/releases/webkitgtk-2.42.1.tar.xz
@@ -34,8 +33,6 @@ sources:
       - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@'
         Source/cmake/FindAVIF.cmake
 modules:
-
-  # The rest of WebkitGTK's deps.
   - name: unifdef
     no-autogen: true
     make-install-args:
@@ -70,14 +67,24 @@ modules:
           timestamp-query: .published_at
           version-query: $tag
           url-query: '"https://github.com/google/highway/archive/\($tag)/highway-\($version).tar.gz"'
-    cleanup:
-      - '*'
+  - name: woff2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/google/woff2/archive/v1.0.2.tar.gz
+        sha256: add272bb09e6384a4833ffca4896350fdb16e0ca22df68c0384773c67a175594
+        x-checker-data:
+          type: anitya
+          project-id: 17587
+          url-template: https://github.com/google/woff2/archive/v$version.tar.gz
   - name: libavif
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DAVIF_CODEC_DAV1D=ON
+      - -DBUILD_SHARED_LIBS=ON
     sources:
       - type: archive
         url: https://github.com/AOMediaCodec/libavif/archive/v1.0.1/libavif-1.0.1.tar.gz
@@ -89,8 +96,6 @@ modules:
           timestamp-query: .published_at
           version-query: $tag | sub("^[vV]"; "")
           url-query: '"https://github.com/AOMediaCodec/libavif/archive/\($tag)/libavif-\($version).tar.gz"'
-    cleanup:
-      - '*'
   - name: libjxl
     buildsystem: cmake-ninja
     builddir: true
@@ -107,6 +112,12 @@ modules:
       - -DJPEGXL_ENABLE_SJPEG=OFF
       - -DJPEGXL_ENABLE_OPENEXR=OFF
       - -DJPEGXL_ENABLE_SKCMS=OFF
+      - -DJPEGXL_FORCE_SYSTEM_BROTLI=ON
+      - -DJPEGXL_FORCE_SYSTEM_LCMS2=ON
+      - -DJPEGXL_FORCE_SYSTEM_HWY=ON
+    post-install:
+      # It doesn't respect disabling static libraries...
+      - rm $FLATPAK_DEST/lib/*.a
     sources:
       - type: archive
         url: https://github.com/libjxl/libjxl/archive/v0.8.2/libjxl-0.8.2.tar.gz
@@ -118,8 +129,6 @@ modules:
           timestamp-query: .published_at
           version-query: $tag | sub("^[vV]"; "")
           url-query: '"https://github.com/libjxl/libjxl/archive/\($tag)/libjxl-\($version).tar.gz"'
-    cleanup:
-      - '*'
   - name: libwpe
     buildsystem: meson
     builddir: true
