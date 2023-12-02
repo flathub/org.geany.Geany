@@ -19,8 +19,8 @@ config-opts:
   - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.42.1.tar.xz
-    sha256: 6f41fac9989d3ee51c08c48de1d439cdeddecbc757e34b6180987d99b16d2499
+    url: https://webkitgtk.org/releases/webkitgtk-2.42.2.tar.xz
+    sha256: 5720aa3e8627f1b9f63252187d4df0f8233ae71d697b1796ebfbe5ca750bd118
     x-checker-data:
       type: html
       url: https://webkitgtk.org/releases/
@@ -30,8 +30,7 @@ sources:
     commands:
       - sed -i 's@NAMES avif.h@NAMES avif/avif.h@' Source/cmake/FindAVIF.cmake
       - sed -i '/PATH_SUFFIXES avif/d' Source/cmake/FindAVIF.cmake
-      - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@'
-        Source/cmake/FindAVIF.cmake
+      - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@' Source/cmake/FindAVIF.cmake
 modules:
   - name: unifdef
     no-autogen: true
@@ -87,8 +86,8 @@ modules:
       - -DBUILD_SHARED_LIBS=ON
     sources:
       - type: archive
-        url: https://github.com/AOMediaCodec/libavif/archive/v1.0.1/libavif-1.0.1.tar.gz
-        sha256: 398fe7039ce35db80fe7da8d116035924f2c02ea4a4aa9f4903df6699287599c
+        url: https://github.com/AOMediaCodec/libavif/archive/v1.0.2/libavif-1.0.2.tar.gz
+        sha256: de8bf79488c5b523b77358df8b85ae69c3078e6b3f1636fc1f313f952269ad20
         x-checker-data:
           type: json
           url: https://api.github.com/repos/AOMediaCodec/libavif/releases/latest
