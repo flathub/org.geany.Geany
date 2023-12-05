@@ -47,8 +47,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AbiWord/enchant/releases/download/v2.6.1/enchant-2.6.1.tar.gz
-        sha256: f24e12469137ae1d03140bb9032a47a5947c36f4d1e2f12b929061005eb15279
+        url: https://github.com/AbiWord/enchant/releases/download/v2.6.3/enchant-2.6.3.tar.gz
+        sha256: c1c5719f2a597ce3e06c938cfb99fb697da093dea7b857cc004dc1dcf1bba182
         x-checker-data:
           type: anitya
           project-id: 6601
