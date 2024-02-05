@@ -19,8 +19,8 @@ config-opts:
   - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.42.4.tar.xz
-    sha256: 52288b30bda22373442cecb86f9c9a569ad8d4769a1f97b352290ed92a67ed86
+    url: https://webkitgtk.org/releases/webkitgtk-2.42.5.tar.xz
+    sha256: b64278c1f20b8cfdbfb5ff573c37d871aba74a1db26d9b39f74e8953fe61e749
     x-checker-data:
       type: html
       url: https://webkitgtk.org/releases/
@@ -135,8 +135,8 @@ modules:
       - --buildtype=plain
     sources:
       - type: archive
-        url: https://github.com/WebPlatformForEmbedded/libwpe/releases/download/1.14.1/libwpe-1.14.1.tar.xz
-        sha256: b1d0cdcf0f8dbb494e65b0f7913e357106da9a0d57f4fbb7b9d1238a6dbe9ade
+        url: https://github.com/WebPlatformForEmbedded/libwpe/releases/download/1.14.2/libwpe-1.14.2.tar.xz
+        sha256: 8ae38022c50cb340c96fdbee1217f1e46ab57fbc1c8ba98142565abbedbe22ef
         x-checker-data:
           type: json
           url: https://api.github.com/repos/WebPlatformForEmbedded/libwpe/releases/latest
