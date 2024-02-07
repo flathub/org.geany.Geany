@@ -7,6 +7,7 @@
   <name>Geany</name>
   <project_license>GPL-2.0+</project_license>
   <summary>A fast and lightweight IDE</summary>
+  <developer_name>Geany Team</developer_name>
   <url type="homepage">https://geany.org/</url>
   <description>
     <p>Geany was developed to provide a small and fast IDE, which has only a
