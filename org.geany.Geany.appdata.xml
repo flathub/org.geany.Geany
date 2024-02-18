@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2005-2017 by Enrico Tröger, Nick Treleaven, Colomban Wendling, Matthew Brush and Frank Lanitz -->
-<component>
-  <id type="desktop">org.geany.Geany</id>
+<component type="desktop-application">
+  <id>org.geany.Geany</id>
   <launchable type="desktop-id">geany.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <name>Geany</name>
