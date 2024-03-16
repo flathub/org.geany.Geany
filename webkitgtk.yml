@@ -19,8 +19,8 @@ config-opts:
   - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.42.5.tar.xz
-    sha256: b64278c1f20b8cfdbfb5ff573c37d871aba74a1db26d9b39f74e8953fe61e749
+    url: https://webkitgtk.org/releases/webkitgtk-2.44.0.tar.xz
+    sha256: c66530e41ba59b1edba4ee89ef20b2188e273bed0497e95084729e3cfbe30c87
     x-checker-data:
       type: html
       url: https://webkitgtk.org/releases/
@@ -119,8 +119,8 @@ modules:
       - rm $FLATPAK_DEST/lib/*.a
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/v0.10.1/libjxl-0.10.1.tar.gz
-        sha256: 91b9a83a230d608b5d35d2ab5068bd0ec7028797575e3013211be5928028c8cd
+        url: https://github.com/libjxl/libjxl/archive/v0.10.2/libjxl-0.10.2.tar.gz
+        sha256: 95e807f63143856dc4d161c071cca01115d2c6405b3d3209854ac6989dc6bb91
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libjxl/libjxl/releases/latest
