@@ -9,8 +9,10 @@ buildsystem: cmake-ninja
 config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DPORT=GTK
+  - -DUSE_GTK4=OFF
   - -DUSE_SOUP2=ON  # This makes it build webkit2gtk-4.0 instead of 4.1.
   - -DUSE_LIBSECRET=OFF
+  - -DUSE_LIBBACKTRACE=OFF
   - -DENABLE_GAMEPAD=OFF
   - -DENABLE_INTROSPECTION=OFF
   - -DENABLE_SPELLCHECK=OFF
