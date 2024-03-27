@@ -9,8 +9,10 @@ buildsystem: cmake-ninja
 config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DPORT=GTK
+  - -DUSE_GTK4=OFF
   - -DUSE_SOUP2=ON  # This makes it build webkit2gtk-4.0 instead of 4.1.
   - -DUSE_LIBSECRET=OFF
+  - -DUSE_LIBBACKTRACE=OFF
   - -DENABLE_GAMEPAD=OFF
   - -DENABLE_INTROSPECTION=OFF
   - -DENABLE_SPELLCHECK=OFF
@@ -19,8 +21,8 @@ config-opts:
   - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.42.5.tar.xz
-    sha256: b64278c1f20b8cfdbfb5ff573c37d871aba74a1db26d9b39f74e8953fe61e749
+    url: https://webkitgtk.org/releases/webkitgtk-2.44.0.tar.xz
+    sha256: c66530e41ba59b1edba4ee89ef20b2188e273bed0497e95084729e3cfbe30c87
     x-checker-data:
       type: html
       url: https://webkitgtk.org/releases/
@@ -119,8 +121,8 @@ modules:
       - rm $FLATPAK_DEST/lib/*.a
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/v0.10.1/libjxl-0.10.1.tar.gz
-        sha256: 91b9a83a230d608b5d35d2ab5068bd0ec7028797575e3013211be5928028c8cd
+        url: https://github.com/libjxl/libjxl/archive/v0.10.2/libjxl-0.10.2.tar.gz
+        sha256: 95e807f63143856dc4d161c071cca01115d2c6405b3d3209854ac6989dc6bb91
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libjxl/libjxl/releases/latest
@@ -135,8 +137,8 @@ modules:
       - --buildtype=plain
     sources:
       - type: archive
-        url: https://github.com/WebPlatformForEmbedded/libwpe/releases/download/1.14.2/libwpe-1.14.2.tar.xz
-        sha256: 8ae38022c50cb340c96fdbee1217f1e46ab57fbc1c8ba98142565abbedbe22ef
+        url: https://github.com/WebPlatformForEmbedded/libwpe/releases/download/1.16.0/libwpe-1.16.0.tar.xz
+        sha256: c7f3a3c6b3d006790d486dc7cceda2b6d2e329de07f33bc47dfc53f00f334b2a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/WebPlatformForEmbedded/libwpe/releases/latest
