@@ -27,8 +27,8 @@ modules:
       - -DBUILD_CLI=OFF
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.0.tar.gz
-        sha256: 9e1d6a880d59026b675456fbb1593c724c68d73c34c0d214d6eb848e9bbd8ae4
+        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.1.tar.gz
+        sha256: 8c1eaf0cf07cba0e9021920bfba9502140220786ed5d8a8ec6c7ad9174522f8e
         x-checker-data:
           type: anitya
           project-id: 1627
@@ -47,8 +47,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AbiWord/enchant/releases/download/v2.7.1/enchant-2.7.1.tar.gz
-        sha256: a1cb8239095d6b0bd99ba2dd012a1402cef1a194f5de1b7214bd528676a65229
+        url: https://github.com/AbiWord/enchant/releases/download/v2.7.3/enchant-2.7.3.tar.gz
+        sha256: fe6ad4cbe8c71b9384ffdef962be52d4d2bd5ebfb6351435bb390543d4f78b1e
         x-checker-data:
           type: anitya
           project-id: 6601
