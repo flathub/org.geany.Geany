@@ -37,14 +37,11 @@ modules:
   - name: geany
     config-opts:
       - --disable-api-docs
+      - --disable-html-docs
     sources:
-      - type: archive
-        url: https://download.geany.org/geany-2.0.tar.bz2
-        sha256: 565b4cd2f0311c1e3a167ec71c4a32dba642e0fe554ae5bb6b8177b7a74ccc92
-        x-checker-data:
-          type: html
-          url: https://www.geany.org/download/releases
-          pattern: (https://download.geany.org/geany-([\d\.]+).tar.bz2)
+      - type: git
+        url: https://github.com/techee/geany.git
+        commit: 4b1be9a5776d1ca125a2b70177b618acee9b9db5
       - type: file
         path: org.geany.Geany.appdata.xml
     post-install:
