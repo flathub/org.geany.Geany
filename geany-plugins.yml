@@ -3,6 +3,7 @@
 
 name: geany-plugins
 config-opts:
+  # This complains if dependencies for any plugin are missing.
   - --enable-all-plugins
 sources:
   - type: archive
@@ -42,18 +43,4 @@ modules:
       - type: shell
         commands:
           - cp -p /usr/share/automake-*/config.{sub,guess} build/aux/
-  - name: enchant
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/AbiWord/enchant/releases/download/v2.8.0/enchant-2.8.0.tar.gz
-        sha256: c57add422237b8a7eed116a9a88d8be4f7b9281778fa36f03e1f2c051ecb0372
-        x-checker-data:
-          type: anitya
-          project-id: 6601
-          url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
-
-# I split WebkitGTK off into its own file because it has so many deps and
-# everything about it is a massive pain.
   - webkitgtk.yml
