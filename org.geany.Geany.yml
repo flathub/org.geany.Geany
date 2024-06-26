@@ -45,6 +45,19 @@ modules:
           type: html
           url: https://www.geany.org/download/releases
           pattern: (https://download.geany.org/geany-([\d\.]+).tar.bz2)
+      # This patch will no longer be necessary when 2.1 releases.
+      - type: patch
+        path: native_dialogs.patch
+      # The substitution on keyfile.c is back! This will still be necessary
+      # after 2.1 releases, because Geany developers will prefer Linux users to
+      # use their modified GTK file chooser by default. I'm making this contrary
+      # call because most users of Flathub packages will expect the native file
+      # chooser to appear whenever they do file operations.
+      # To whomever next inherits the maintenance of this package, it's your
+      # decision on whether or not to keep this around.
+      - type: shell
+        commands:
+          - sed -i 's/GEANY_DEFAULT_USE_NATIVE_DLGS.*FALSE/GEANY_DEFAULT_USE_NATIVE_DLGS TRUE/' src/keyfile.c
       - type: file
         path: org.geany.Geany.appdata.xml
     post-install:
