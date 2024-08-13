@@ -21,8 +21,8 @@ config-opts:
   - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.44.2.tar.xz
-    sha256: 523f42c8ff24832add17631f6eaafe8f9303afe316ef1a7e1844b952a7f7521b
+    url: https://webkitgtk.org/releases/webkitgtk-2.44.3.tar.xz
+    sha256: dc82d042ecaca981a4852357c06e5235743319cf10a94cd36ad41b97883a0b54
     x-checker-data:
       type: html
       url: https://webkitgtk.org/releases/
@@ -88,8 +88,8 @@ modules:
       - -DBUILD_SHARED_LIBS=ON
     sources:
       - type: archive
-        url: https://github.com/AOMediaCodec/libavif/archive/v1.0.4/libavif-1.0.4.tar.gz
-        sha256: dc56708c83a4b934a8af2b78f67f866ba2fb568605c7cf94312acf51ee57d146
+        url: https://github.com/AOMediaCodec/libavif/archive/v1.1.1/libavif-1.1.1.tar.gz
+        sha256: 914662e16245e062ed73f90112fbb4548241300843a7772d8d441bb6859de45b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/AOMediaCodec/libavif/releases/latest
@@ -121,8 +121,8 @@ modules:
       - rm $FLATPAK_DEST/lib/*.a
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/v0.10.2/libjxl-0.10.2.tar.gz
-        sha256: 95e807f63143856dc4d161c071cca01115d2c6405b3d3209854ac6989dc6bb91
+        url: https://github.com/libjxl/libjxl/archive/v0.10.3/libjxl-0.10.3.tar.gz
+        sha256: e0191411cfcd927eebe5392d030fe4283fe27ba1685ab7265104936e0b4283a6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libjxl/libjxl/releases/latest
