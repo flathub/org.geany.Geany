@@ -21,8 +21,8 @@ config-opts:
   - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.44.2.tar.xz
-    sha256: 523f42c8ff24832add17631f6eaafe8f9303afe316ef1a7e1844b952a7f7521b
+    url: https://webkitgtk.org/releases/webkitgtk-2.44.4.tar.xz
+    sha256: 2ce4ec1b78413035037aba8326b31ed72696626b7bea7bace5e46ac0d8cbe796
     x-checker-data:
       type: html
       url: https://webkitgtk.org/releases/
@@ -88,8 +88,8 @@ modules:
       - -DBUILD_SHARED_LIBS=ON
     sources:
       - type: archive
-        url: https://github.com/AOMediaCodec/libavif/archive/v1.0.4/libavif-1.0.4.tar.gz
-        sha256: dc56708c83a4b934a8af2b78f67f866ba2fb568605c7cf94312acf51ee57d146
+        url: https://github.com/AOMediaCodec/libavif/archive/v1.1.1/libavif-1.1.1.tar.gz
+        sha256: 914662e16245e062ed73f90112fbb4548241300843a7772d8d441bb6859de45b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/AOMediaCodec/libavif/releases/latest
@@ -121,8 +121,8 @@ modules:
       - rm $FLATPAK_DEST/lib/*.a
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/v0.10.2/libjxl-0.10.2.tar.gz
-        sha256: 95e807f63143856dc4d161c071cca01115d2c6405b3d3209854ac6989dc6bb91
+        url: https://github.com/libjxl/libjxl/archive/v0.11.0/libjxl-0.11.0.tar.gz
+        sha256: 7ce4ec8bb37a435a73ac18c4c9ff56c2dc6c98892bf3f53a328e3eca42efb9cf
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libjxl/libjxl/releases/latest
@@ -153,8 +153,8 @@ modules:
       - --buildtype=plain
     sources:
       - type: archive
-        url: https://github.com/Igalia/WPEBackend-fdo/releases/download/1.14.2/wpebackend-fdo-1.14.2.tar.xz
-        sha256: 93c9766ae9864eeaeaee2b0a74f22cbca08df42c1a1bdb55b086f2528e380d38
+        url: https://github.com/Igalia/WPEBackend-fdo/releases/download/1.14.3/wpebackend-fdo-1.14.3.tar.xz
+        sha256: 10121842595a850291db3e82f3db0b9984df079022d386ce42c2b8508159dc6c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Igalia/WPEBackend-fdo/releases/latest
