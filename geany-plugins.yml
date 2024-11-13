@@ -27,8 +27,8 @@ modules:
       - -DBUILD_CLI=OFF
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.1.tar.gz
-        sha256: 8c1eaf0cf07cba0e9021920bfba9502140220786ed5d8a8ec6c7ad9174522f8e
+        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.4.tar.gz
+        sha256: 49d0fc50ab931816f6bfc1ac68f8d74b760450eebdb5374e803ee36550f26774
         x-checker-data:
           type: anitya
           project-id: 1627
