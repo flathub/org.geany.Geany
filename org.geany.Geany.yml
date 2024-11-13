@@ -1,6 +1,6 @@
 app-id: org.geany.Geany
 runtime: org.freedesktop.Sdk
-runtime-version: '24.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 
 command: geany
