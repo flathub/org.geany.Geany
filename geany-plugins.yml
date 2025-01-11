@@ -2,6 +2,8 @@
 # A lot of these snippets are borrowed from all over the Flathub github org.
 
 name: geany-plugins
+build-options:
+  cflags: -Wno-error=incompatible-pointer-types
 config-opts:
   - --enable-all-plugins
 sources:
