@@ -37,9 +37,10 @@ modules:
           url-template: https://github.com/libgit2/libgit2/archive/refs/tags/v$version.tar.gz
   - name: ctpl
     sources:
-      - type: archive
-        url: http://download.tuxfamily.org/ctpl/releases/ctpl-0.3.5.tar.gz
-        sha256: 21108fc7567ed216deea4591adbfece8e88b1f4bb1ca77c37400920644d756be
+      - type: git
+        url: http://git.tuxfamily.org/ctpl/ctpl.git
+        tag: v0.3.5
+        commit: 119de7374fb2c6484b44a021a2ed9054f041eaa8
   - name: enchant
     cleanup:
       - /bin
