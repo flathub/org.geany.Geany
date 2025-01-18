@@ -2,6 +2,8 @@
 # A lot of these snippets are borrowed from all over the Flathub github org.
 
 name: geany-plugins
+build-options:
+  cflags: -Wno-error=incompatible-pointer-types
 config-opts:
   - --enable-all-plugins
 sources:
@@ -36,8 +38,8 @@ modules:
   - name: ctpl
     sources:
       - type: archive
-        url: http://download.tuxfamily.org/ctpl/releases/ctpl-0.3.5.tar.gz
-        sha256: 21108fc7567ed216deea4591adbfece8e88b1f4bb1ca77c37400920644d756be
+        url: http://deb.debian.org/debian/pool/main/c/ctpl/ctpl_0.3.5+dfsg.orig.tar.xz
+        sha256: 3774362d0ea158193298f45b42951c181e26ca0b5c4808c412ab8a153c696abd
   - name: enchant
     cleanup:
       - /bin
