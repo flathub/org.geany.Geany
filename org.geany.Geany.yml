@@ -17,6 +17,30 @@ finish-args:
   - --filesystem=xdg-run/geany:create
 
 modules:
+  - name: libXmu #xterm
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/lib/libxmu.git
+        tag: "libXmu-1.2.1"
+        commit: 792f80402ee06ce69bca3a8f2a84295999c3a170
+
+  - name: libXaw #xterm
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/lib/libxaw.git
+        tag: "libXaw-1.0.16"
+        commit: f14ba54e9c7e415a05e33dd0b3b5f96e5de05c8b
+
+  - name: xterm
+    buildsystem: autotools
+    config-opts:
+      - --disable-full-tgetent
+    sources:
+      - type: archive
+        url: https://invisible-island.net/archives/xterm/xterm-396.tgz
+        sha256: 43f94b6d0eecb4219a99f46352e746f2ab5558e40d922d411acff96cc778a6a5
   - shared-modules/intltool/intltool-0.51.json
   - name: vte
     buildsystem: meson
