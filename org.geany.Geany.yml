@@ -62,26 +62,10 @@ modules:
     config-opts:
       - --disable-api-docs
     sources:
-      - type: archive
-        url: https://download.geany.org/geany-2.0.tar.bz2
-        sha256: 565b4cd2f0311c1e3a167ec71c4a32dba642e0fe554ae5bb6b8177b7a74ccc92
-        x-checker-data:
-          type: html
-          url: https://www.geany.org/download/releases
-          pattern: (https://download.geany.org/geany-([\d\.]+).tar.bz2)
-      # This patch will no longer be necessary when 2.1 releases.
-      - type: patch
-        path: native_dialogs.patch
-      # The substitution on keyfile.c is back! This will still be necessary
-      # after 2.1 releases, because Geany developers will prefer Linux users to
-      # use their modified GTK file chooser by default. I'm making this contrary
-      # call because most users of Flathub packages will expect the native file
-      # chooser to appear whenever they do file operations.
-      # To whomever next inherits the maintenance of this package, it's your
-      # decision on whether or not to keep this around.
-      - type: shell
-        commands:
-          - sed -i 's/GEANY_DEFAULT_USE_NATIVE_DLGS.*FALSE/GEANY_DEFAULT_USE_NATIVE_DLGS TRUE/' src/keyfile.c
+      - type: git
+        url: https://github.com/geany/geany.git
+        commit: cb5ff3cf0b63971010e60ea2feedd1a0181c1ace
+        tag: 2.1.0
       - type: file
         path: org.geany.Geany.appdata.xml
     post-install:
