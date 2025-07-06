@@ -59,8 +59,9 @@ modules:
           versions:
             <: '0.73'
   - name: geany
-    config-opts:
-      - --disable-api-docs
+    buildsystem: meson
+    # config-opts:
+      # - --disable-api-docs
     sources:
       - type: git
         url: https://github.com/geany/geany.git
