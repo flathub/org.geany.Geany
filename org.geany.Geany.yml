@@ -73,7 +73,7 @@ modules:
   - name: geany
     buildsystem: autotools
     config-opts:
-      - --disable-api-docs
+      - --disable-html-docs
     post-install:
       - install -Dm644 -t /app/share/appdata org.geany.Geany.appdata.xml
     sources:
