@@ -5,13 +5,10 @@ name: geany-plugins
 config-opts:
   - --enable-all-plugins
 sources:
-  - type: archive
-    url: https://plugins.geany.org/geany-plugins/geany-plugins-2.0.tar.bz2
-    sha256: 9fc2ec5c99a74678fb9e8cdfbd245d3e2061a448d70fd110a6aefb62dd514705
-    x-checker-data:
-      type: html
-      url: https://www.geany.org/download/releases
-      pattern: (https://plugins.geany.org/geany-plugins/geany-plugins-([\d\.]+).tar.bz2)
+  - type: git
+    url: https://github.com/geany/geany-plugins.git
+    commit: d088bed81c3640c34eefe8d82674149f9dcc3111
+    tag: 2.1.0
 modules:
   - shared-modules/lua5.1/lua-5.1.5.json
   - shared-modules/libsoup/libsoup-2.4.json
