@@ -43,6 +43,14 @@ modules:
         sha256: 43f94b6d0eecb4219a99f46352e746f2ab5558e40d922d411acff96cc778a6a5
         
   - shared-modules/intltool/intltool-0.51.json
+
+  - name: fast-float #vte
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/fastfloat/fast_float.git
+        tag: v8.0.2
+        commit: 50a80a73ab2ab256ba1c3bf86923ddd8b4202bc7
   
   - name: vte #geany-plugins
     buildsystem: meson
