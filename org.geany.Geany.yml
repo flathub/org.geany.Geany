@@ -89,3 +89,5 @@ modules:
         tag: 2.1.0
       - type: file
         path: org.geany.Geany.appdata.xml
+
+  - geany-plugins.yml
