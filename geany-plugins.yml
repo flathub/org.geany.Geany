@@ -1,5 +1,3 @@
-# Geany-Plugins and dependencies below here.
-# A lot of these snippets are borrowed from all over the Flathub github org.
 
 name: geany-plugins
 config-opts:
@@ -10,12 +8,12 @@ sources:
     commit: d088bed81c3640c34eefe8d82674149f9dcc3111
     tag: 2.1.0
 modules:
+
   - shared-modules/lua5.1/lua-5.1.5.json
-  - shared-modules/libsoup/libsoup-2.4.json
+  
   - name: libgit2
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_INSTALL_PREFIX=/app
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DUSE_HTTPS=OFF
       - -DUSE_SSH=OFF
@@ -23,30 +21,14 @@ modules:
       - -DBUILD_TESTS=OFF
       - -DBUILD_CLI=OFF
     sources:
-      - type: archive
-        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.4.tar.gz
-        sha256: 49d0fc50ab931816f6bfc1ac68f8d74b760450eebdb5374e803ee36550f26774
-        x-checker-data:
-          type: anitya
-          project-id: 1627
-          url-template: https://github.com/libgit2/libgit2/archive/refs/tags/v$version.tar.gz
+      - type: git
+        url: https://github.com/libgit2/libgit2.git
+        commit: 0060d9cf5666f015b1067129bd874c6cc4c9c7ac
+        
   - name: ctpl
     sources:
       - type: archive
         url: http://deb.debian.org/debian/pool/main/c/ctpl/ctpl_0.3.5+dfsg.orig.tar.xz
         sha256: 3774362d0ea158193298f45b42951c181e26ca0b5c4808c412ab8a153c696abd
-  - name: enchant
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/AbiWord/enchant/releases/download/v2.8.1/enchant-2.8.1.tar.gz
-        sha256: ff79de470b8eb16f53849dc49f2bce8ca4eb7decabfc1349716fe12616e52f4e
-        x-checker-data:
-          type: anitya
-          project-id: 6601
-          url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
-
-# I split WebkitGTK off into its own file because it has so many deps and
-# everything about it is a massive pain.
+        
   - webkitgtk.yml
