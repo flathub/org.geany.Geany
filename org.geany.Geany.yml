@@ -120,4 +120,4 @@ modules:
       - type: file
         path: wrapper/ide-first-run.txt
 
-  # - geany-plugins.yml
+  - geany-plugins.yml
