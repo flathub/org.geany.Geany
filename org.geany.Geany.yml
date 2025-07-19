@@ -1,7 +1,7 @@
 app-id: org.geany.Geany
-runtime: org.freedesktop.Sdk
-runtime-version: '24.08'
-sdk: org.freedesktop.Sdk
+runtime: org.gnome.Platform
+runtime-version: '48'
+sdk: org.gnome.Sdk
 
 command: geany
 rename-icon: geany
@@ -15,9 +15,6 @@ finish-args:
   - --share=network
   - --filesystem=host
   - --filesystem=xdg-run/geany:create
-
-sdk-extensions:
-  - org.telegram.desktop.webview
   
 add-extensions:
   org.codeblocks.codeblocks.Plugin:
