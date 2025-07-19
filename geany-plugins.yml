@@ -43,9 +43,4 @@ modules:
           project-id: 6601
           url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
 
-  - name: webkitgtk
-    buildsystem: simple
-    build-commands:
-      - cp -ru /usr/lib/sdk/webview/* /app/
-
   # - webkitgtk.yml
