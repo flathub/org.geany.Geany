@@ -49,7 +49,7 @@ The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools, adds developm
 - raylib5
 - fltk1
 
-They are installed in /app/plugins/devtools/ with the structure:
+They are installed in /app/tools/ with the structure:
 
 ├── bin
 ├── include
