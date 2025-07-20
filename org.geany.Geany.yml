@@ -10,13 +10,34 @@ rename-desktop-file: geany.desktop
 
 finish-args:
   - --share=ipc
+  - --device=dri
   - --socket=fallback-x11
   - --socket=wayland
   - --share=network
   - --filesystem=host
   - --filesystem=xdg-run/geany:create
-
+  
+add-extensions:
+  org.codeblocks.codeblocks.Plugin:
+    version: stable
+    directory: tools
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+    add-ld-path: lib
+    
+add-build-extensions:
+  org.telegram.desktop.webview:
+    remove-after-build: true
+    version: 'stable'
+    directory: webkitgtk
+    
 modules:
+  - name: tools
+    buildsystem: simple
+    build-commands:
+      - install -d /app/tools
+      
   - name: libXmu #xterm
     buildsystem: autotools
     sources:
@@ -41,51 +62,69 @@ modules:
       - type: archive
         url: https://invisible-island.net/archives/xterm/xterm-396.tgz
         sha256: 43f94b6d0eecb4219a99f46352e746f2ab5558e40d922d411acff96cc778a6a5
+        
   - shared-modules/intltool/intltool-0.51.json
-  - name: vte
+
+  - name: fast-float #vte
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/fastfloat/fast_float.git
+        tag: v8.0.2
+        commit: 50a80a73ab2ab256ba1c3bf86923ddd8b4202bc7
+  
+  - name: vte #geany-plugins
     buildsystem: meson
     config-opts:
       - -Ddocs=false
       - -Dvapi=false
       - -Dgir=false
+      - -Dgtk4=false
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/vte.git
-        tag: 0.72.4
-        commit: 45d815431c08ff5a3cf076cde5edd43054773c4a
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
-          versions:
-            <: '0.73'
-  - name: geany
-    config-opts:
-      - --disable-api-docs
+        tag: 0.80.3
+        commit: 02eaf1997d904dbfb792e2ae9ae0ba8b82f117f1
+            
+  - name: lxml
+    buildsystem: simple
+    build-options:
+      cflags: -fpermissive
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "lxml" --no-build-isolation
     sources:
-      - type: archive
-        url: https://download.geany.org/geany-2.0.tar.bz2
-        sha256: 565b4cd2f0311c1e3a167ec71c4a32dba642e0fe554ae5bb6b8177b7a74ccc92
-        x-checker-data:
-          type: html
-          url: https://www.geany.org/download/releases
-          pattern: (https://download.geany.org/geany-([\d\.]+).tar.bz2)
-      # This patch will no longer be necessary when 2.1 releases.
-      - type: patch
-        path: native_dialogs.patch
-      # The substitution on keyfile.c is back! This will still be necessary
-      # after 2.1 releases, because Geany developers will prefer Linux users to
-      # use their modified GTK file chooser by default. I'm making this contrary
-      # call because most users of Flathub packages will expect the native file
-      # chooser to appear whenever they do file operations.
-      # To whomever next inherits the maintenance of this package, it's your
-      # decision on whether or not to keep this around.
-      - type: shell
-        commands:
-          - sed -i 's/GEANY_DEFAULT_USE_NATIVE_DLGS.*FALSE/GEANY_DEFAULT_USE_NATIVE_DLGS TRUE/' src/keyfile.c
+      - type: file
+        url: https://files.pythonhosted.org/packages/c5/ed/60eb6fa2923602fba988d9ca7c5cdbd7cf25faa795162ed538b527a35411/lxml-6.0.0.tar.gz
+        sha256: 032e65120339d44cdc3efc326c9f660f5f7205f3a535c1fdbf898b29ea01fb72
+      
+  - name: geany
+    buildsystem: autotools
+    config-opts:
+      - --disable-html-docs
+    post-install:
+      - install -Dm644 -t /app/share/appdata org.geany.Geany.appdata.xml
+      - mv /app/bin/geany /app/bin/geany-bin 
+    sources:
+      - type: git
+        url: https://github.com/geany/geany.git
+        commit: cb5ff3cf0b63971010e60ea2feedd1a0181c1ace
+        tag: 2.1.0
       - type: file
         path: org.geany.Geany.appdata.xml
-    post-install:
-      - install -Dm644 -t /app/share/metainfo org.geany.Geany.appdata.xml
+        
+  - name: ide-flatpak-wrapper
+    buildsystem: meson
+    config-opts:
+      - -Deditor_binary=/app/bin/geany-bin
+      - -Deditor_title=Geany
+      - -Dprogram_name=geany
+      - -Dfirst_run_template=ide-first-run.txt
+      - -Dsdk_version=24.08
+    sources:
+      - type: git
+        url: https://github.com/flathub/ide-flatpak-wrapper.git
+        commit: 445fdd20b2f083fe12ac9ac61c1a30864da8a8d1
+      - type: file
+        path: wrapper/ide-first-run.txt
 
-# If you want to build Geany without plugins, just remove the line below.
   - geany-plugins.yml
