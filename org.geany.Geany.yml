@@ -25,6 +25,12 @@ add-extensions:
     autodelete: true
     add-ld-path: lib
     
+add-build-extensions:
+  org.telegram.desktop.webview:
+    remove-after-build: true
+    version: 'stable'
+    directory: webkitgtk
+    
 modules:
   - name: tools
     buildsystem: simple
