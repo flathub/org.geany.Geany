@@ -1,4 +1,3 @@
-
 name: geany-plugins
 config-opts:
   - --enable-all-plugins
@@ -7,6 +6,7 @@ sources:
     url: https://github.com/geany/geany-plugins.git
     commit: d088bed81c3640c34eefe8d82674149f9dcc3111
     tag: 2.1.0
+    
 modules:
 
   - shared-modules/lua5.1/lua-5.1.5.json
@@ -43,4 +43,40 @@ modules:
           project-id: 6601
           url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
 
-  # - webkitgtk.yml
+  - name: webkitgtk
+    buildsystem: simple
+    build-commands:
+      - ar x webkit.deb
+      - tar -xJf data.tar.xz
+      - ar x js.deb
+      - tar -xJf data.tar.xz
+      - find ./ -type f -name "*.pc" -exec mv {} /app/lib/pkgconfig \;
+      - rm -r usr/lib
+      - mv usr/include/webkitgtk-4.1/* /app/include/ && rm -r usr/include/webkitgtk-4.1
+      - cp -ru usr/* /app/
+      - cp -ru /app/webkitgtk/* /app/
+    sources:
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libwebkit2gtk-4.1-dev_2.48.3-1~deb12u1_amd64.deb
+        sha256: 4a8a90073432df01439fbb8a163164d70a7d2ff9c839df61e487f1816b265caa
+        dest-filename: webkit.deb
+        only-arches:
+          - x86_64
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libjavascriptcoregtk-4.1-dev_2.48.3-1~deb12u1_amd64.deb
+        sha256: 16b6b6789182ec17f04e88a82336ec9854b59af5da4a1463833bf7100c026993
+        dest-filename: js.deb
+        only-arches:
+          - x86_64
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libwebkit2gtk-4.1-dev_2.48.3-1~deb12u1_arm64.deb
+        sha256: 4cb68b23c763ddf7d35c91bfec7ebc6d5e4861fdb8182b65e5279a46496ad8a6
+        dest-filename: webkit.deb
+        only-arches:
+          - aarch64
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libjavascriptcoregtk-4.1-dev_2.48.3-1~deb12u1_arm64.deb
+        sha256: 7834658b50a126d8c969751ff90a40149e727a537ee9de1a44ce5cfb854c977c
+        dest-filename: js.deb
+        only-arches:
+          - aarch64
