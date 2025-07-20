@@ -68,15 +68,8 @@ They are installed in /app/plugins/devtools/ with the structure:
         ├── cmake
         └── pkgconfig
 
-For example, to configure a project with SFML3 you must indicate the use of headers and libraries,
-in Proyect-> Build Options-> Search directories, having created a project for SFML2.
-* /app/plugins/devtools/include/SFML3 (Add to Compiler)
-* /app/plugins/devtools/lib/SFML3 (Add to Linker)
-
-For SFML2,
-* /app/plugins/devtools/include/SFML2 (Add to Compiler)
-* /app/plugins/devtools/lib/SFML2 (Add to Linker)
 
 Maintainers
 --------------------------------------------------------------
 TiZ-HugLife ( November 2021 - November 2024 )  https://github.com/TiZ-HugLife
+bztd        ( July     2025 - ...           )  https://github.com/bztd                        
