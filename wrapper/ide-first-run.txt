@@ -14,7 +14,7 @@ to access SDKs on your host system!
 This flatpak provides a standard development environment (gcc, python, etc).
 To see what's available:
 
-  $ flatpak run --command=sh org.codeblocks.codeblocks
+  $ flatpak run --command=sh org.geany.Geany
   $ ls /usr/bin (shared runtime)
   $ ls /app/bin (bundled with this flatpak)
 
