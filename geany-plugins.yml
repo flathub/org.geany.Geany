@@ -55,7 +55,8 @@ modules:
       - mv usr/include/webkitgtk-4.1/* /app/include/ && rm -r usr/include/webkitgtk-4.1
       - cp -ru usr/* /app/
       - cp -ru /app/webkitgtk/* /app/
-      - mkdir -p /app/lib/webview && mv /app/libexec /app/lib/webview/
+      - mkdir -p /app/lib/webview/lib && mv /app/libexec /app/lib/webview/
+      - mv /app/lib/webkit2gtk-4.1 /app/lib/webview/lib/
     sources:
       - type: file
         url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libwebkit2gtk-4.1-dev_2.48.3-1~deb12u1_amd64.deb
