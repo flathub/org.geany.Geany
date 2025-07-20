@@ -26,7 +26,7 @@ add-extensions:
     add-ld-path: lib
     
 modules:
-  - name: tools-webview
+  - name: tools
     buildsystem: simple
     build-commands:
       - install -d /app/tools
