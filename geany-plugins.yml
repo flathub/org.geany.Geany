@@ -1,26 +1,19 @@
-# Geany-Plugins and dependencies below here.
-# A lot of these snippets are borrowed from all over the Flathub github org.
-
 name: geany-plugins
-build-options:
-  cflags: -Wno-error=incompatible-pointer-types
 config-opts:
   - --enable-all-plugins
 sources:
-  - type: archive
-    url: https://plugins.geany.org/geany-plugins/geany-plugins-2.0.tar.bz2
-    sha256: 9fc2ec5c99a74678fb9e8cdfbd245d3e2061a448d70fd110a6aefb62dd514705
-    x-checker-data:
-      type: html
-      url: https://www.geany.org/download/releases
-      pattern: (https://plugins.geany.org/geany-plugins/geany-plugins-([\d\.]+).tar.bz2)
+  - type: git
+    url: https://github.com/geany/geany-plugins.git
+    commit: d088bed81c3640c34eefe8d82674149f9dcc3111
+    tag: 2.1.0
+    
 modules:
+
   - shared-modules/lua5.1/lua-5.1.5.json
-  - shared-modules/libsoup/libsoup-2.4.json
+  
   - name: libgit2
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_INSTALL_PREFIX=/app
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DUSE_HTTPS=OFF
       - -DUSE_SSH=OFF
@@ -28,19 +21,17 @@ modules:
       - -DBUILD_TESTS=OFF
       - -DBUILD_CLI=OFF
     sources:
-      - type: archive
-        url: https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.4.tar.gz
-        sha256: 49d0fc50ab931816f6bfc1ac68f8d74b760450eebdb5374e803ee36550f26774
-        x-checker-data:
-          type: anitya
-          project-id: 1627
-          url-template: https://github.com/libgit2/libgit2/archive/refs/tags/v$version.tar.gz
+      - type: git
+        url: https://github.com/libgit2/libgit2.git
+        commit: 0060d9cf5666f015b1067129bd874c6cc4c9c7ac
+        
   - name: ctpl
     sources:
       - type: archive
         url: http://deb.debian.org/debian/pool/main/c/ctpl/ctpl_0.3.5+dfsg.orig.tar.xz
         sha256: 3774362d0ea158193298f45b42951c181e26ca0b5c4808c412ab8a153c696abd
-  - name: enchant
+
+  - name: enchant # ? vala
     cleanup:
       - /bin
     sources:
@@ -51,7 +42,53 @@ modules:
           type: anitya
           project-id: 6601
           url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
-
-# I split WebkitGTK off into its own file because it has so many deps and
-# everything about it is a massive pain.
-  - webkitgtk.yml
+          
+  - name: evince # Latex # open pdfs
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 -t /app/bin evince
+    sources:
+      - type: script
+        dest-filename: evince
+        commands:
+          - xdg-open $@
+      
+  - name: webkitgtk
+    buildsystem: simple
+    build-commands:
+      - ar x webkit.deb
+      - tar -xJf data.tar.xz
+      - ar x js.deb
+      - tar -xJf data.tar.xz
+      - find ./ -type f -name "*.pc" -exec mv {} /app/lib/pkgconfig \;
+      - rm -r usr/lib
+      - mv usr/include/webkitgtk-4.1/* /app/include/ && rm -r usr/include/webkitgtk-4.1
+      - cp -ru usr/* /app/
+      - cp -ru /app/webkitgtk/* /app/
+      - mkdir -p /app/lib/webview/lib && mv /app/libexec /app/lib/webview/
+      - mv /app/lib/webkit2gtk-4.1 /app/lib/webview/lib/
+    sources:
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libwebkit2gtk-4.1-dev_2.48.3-1~deb12u1_amd64.deb
+        sha256: 4a8a90073432df01439fbb8a163164d70a7d2ff9c839df61e487f1816b265caa
+        dest-filename: webkit.deb
+        only-arches:
+          - x86_64
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libjavascriptcoregtk-4.1-dev_2.48.3-1~deb12u1_amd64.deb
+        sha256: 16b6b6789182ec17f04e88a82336ec9854b59af5da4a1463833bf7100c026993
+        dest-filename: js.deb
+        only-arches:
+          - x86_64
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libwebkit2gtk-4.1-dev_2.48.3-1~deb12u1_arm64.deb
+        sha256: 4cb68b23c763ddf7d35c91bfec7ebc6d5e4861fdb8182b65e5279a46496ad8a6
+        dest-filename: webkit.deb
+        only-arches:
+          - aarch64
+      - type: file
+        url: http://security.debian.org/debian-security/pool/updates/main/w/webkit2gtk/libjavascriptcoregtk-4.1-dev_2.48.3-1~deb12u1_arm64.deb
+        sha256: 7834658b50a126d8c969751ff90a40149e727a537ee9de1a44ce5cfb854c977c
+        dest-filename: js.deb
+        only-arches:
+          - aarch64

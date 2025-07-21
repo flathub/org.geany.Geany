@@ -1,166 +1,37 @@
-# And now, WebkitGTK and its deps *specifically.*
-# Big thanks to Telegram Desktop Webview's manifest maintainers for this.
-# Because I took pretty much the whole stupid thing and refactored it into its
-# own yml file. I then added many extra parts from all over the Flathub org.
-# Anyone who needs to include webkitgtk, *please* feel free to use this.
-
-name: webkit2gtk-4.0
+name: webkitgtk
 buildsystem: cmake-ninja
+build-options:
+  cflags: -DNDEBUG -g0
+  cxxflags: -DNDEBUG -g0
+  strip: true
 config-opts:
-  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  - -DCMAKE_BUILD_TYPE=None
   - -DPORT=GTK
   - -DUSE_GTK4=OFF
-  - -DUSE_SOUP2=ON  # This makes it build webkit2gtk-4.0 instead of 4.1.
-  - -DUSE_LIBSECRET=OFF
   - -DUSE_LIBBACKTRACE=OFF
+  - -DUSE_LIBSECRET=OFF
+  - -DUSE_SYSTEM_SYSPROF_CAPTURE=OFF
+  - -DUSE_WOFF2=OFF
+  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF
   - -DENABLE_GAMEPAD=OFF
   - -DENABLE_INTROSPECTION=OFF
+  - -DENABLE_SPEECH_SYNTHESIS=OFF
   - -DENABLE_SPELLCHECK=OFF
-  - -DENABLE_DOCUMENTATION=OFF
-  - -DENABLE_MINIBROWSER=OFF
-  - -DUSE_SYSTEM_SYSPROF_CAPTURE=NO
-  - -DENABLE_BUBBLEWRAP_SANDBOX=OFF  # Unused inside of flatpak
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.46.3.tar.xz
-    sha256: 85e09fa6ff9fea49678ba9975dbc64ea3242833f8f8a7d6a8937b2f292fcb28d
-    x-checker-data:
-      type: html
-      url: https://webkitgtk.org/releases/
-      version-pattern: LATEST-STABLE-(\d[\.\d]+\d)
-      url-template: https://webkitgtk.org/releases/webkitgtk-$version.tar.xz
-  - type: shell
-    commands:
-      - sed -i 's@NAMES avif.h@NAMES avif/avif.h@' Source/cmake/FindAVIF.cmake
-      - sed -i '/PATH_SUFFIXES avif/d' Source/cmake/FindAVIF.cmake
-      - sed -i 's@${AVIF_INCLUDE_DIR}/avif.h@${AVIF_INCLUDE_DIR}/avif/avif.h@' Source/cmake/FindAVIF.cmake
+    url: https://webkitgtk.org/releases/webkitgtk-2.48.3.tar.xz
+    sha256: d4dc5970f0fc6a529ff7fd67bcbfab2bbb5e91be789b2e9279640b3217a782c3
+    
 modules:
-  - name: unifdef
+
+  - name: unifdef 
     no-autogen: true
     make-install-args:
       - prefix=${FLATPAK_DEST}
+    cleanup:
+      - '*'
     sources:
       - type: archive
         url: https://dotat.at/prog/unifdef/unifdef-2.12.tar.xz
         sha256: 43ce0f02ecdcdc723b2475575563ddb192e988c886d368260bc0a63aee3ac400
-        x-checker-data:
-          type: anitya
-          project-id: 5046
-          url-template: https://dotat.at/prog/unifdef/unifdef-$version.tar.xz
-    cleanup:
-      - '*'
-  - name: highway
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=ON
-      - -DBUILD_TESTING=OFF
-      - -DHWY_ENABLE_CONTRIB=OFF
-      - -DHWY_ENABLE_EXAMPLES=OFF
-    sources:
-      - type: archive
-        url: https://github.com/google/highway/archive/1.2.0/highway-1.2.0.tar.gz
-        sha256: 7e0be78b8318e8bdbf6fa545d2ecb4c90f947df03f7aadc42c1967f019e63343
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/google/highway/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag
-          url-query: '"https://github.com/google/highway/archive/\($tag)/highway-\($version).tar.gz"'
-  - name: woff2
-    buildsystem: cmake-ninja
-    builddir: true
-    sources:
-      - type: archive
-        url: https://github.com/google/woff2/archive/v1.0.2.tar.gz
-        sha256: add272bb09e6384a4833ffca4896350fdb16e0ca22df68c0384773c67a175594
-        x-checker-data:
-          type: anitya
-          project-id: 17587
-          url-template: https://github.com/google/woff2/archive/v$version.tar.gz
-  - name: libavif
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DAVIF_CODEC_DAV1D=ON
-      - -DAVIF_LIBYUV=OFF
-      - -DBUILD_SHARED_LIBS=ON
-    sources:
-      - type: archive
-        url: https://github.com/AOMediaCodec/libavif/archive/v1.1.1/libavif-1.1.1.tar.gz
-        sha256: 914662e16245e062ed73f90112fbb4548241300843a7772d8d441bb6859de45b
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/AOMediaCodec/libavif/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag | sub("^[vV]"; "")
-          url-query: '"https://github.com/AOMediaCodec/libavif/archive/\($tag)/libavif-\($version).tar.gz"'
-  - name: libjxl
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DJPEGXL_ENABLE_DEVTOOLS=OFF
-      - -DJPEGXL_ENABLE_TOOLS=OFF
-      - -DJPEGXL_ENABLE_DOXYGEN=OFF
-      - -DJPEGXL_ENABLE_MANPAGES=OFF
-      - -DJPEGXL_ENABLE_BENCHMARK=OFF
-      - -DJPEGXL_ENABLE_EXAMPLES=OFF
-      - -DJPEGXL_ENABLE_JNI=OFF
-      - -DJPEGXL_ENABLE_SJPEG=OFF
-      - -DJPEGXL_ENABLE_OPENEXR=OFF
-      - -DJPEGXL_ENABLE_SKCMS=OFF
-      - -DJPEGXL_FORCE_SYSTEM_BROTLI=ON
-      - -DJPEGXL_FORCE_SYSTEM_LCMS2=ON
-      - -DJPEGXL_FORCE_SYSTEM_HWY=ON
-    post-install:
-      # It doesn't respect disabling static libraries...
-      - rm $FLATPAK_DEST/lib/*.a
-    sources:
-      - type: archive
-        url: https://github.com/libjxl/libjxl/archive/v0.11.0/libjxl-0.11.0.tar.gz
-        sha256: 7ce4ec8bb37a435a73ac18c4c9ff56c2dc6c98892bf3f53a328e3eca42efb9cf
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/libjxl/libjxl/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag | sub("^[vV]"; "")
-          url-query: '"https://github.com/libjxl/libjxl/archive/\($tag)/libjxl-\($version).tar.gz"'
-  - name: libwpe
-    buildsystem: meson
-    builddir: true
-    config-opts:
-      - --buildtype=plain
-    sources:
-      - type: archive
-        url: https://github.com/WebPlatformForEmbedded/libwpe/releases/download/1.16.0/libwpe-1.16.0.tar.xz
-        sha256: c7f3a3c6b3d006790d486dc7cceda2b6d2e329de07f33bc47dfc53f00f334b2a
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/WebPlatformForEmbedded/libwpe/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag
-          url-query: '"https://github.com/WebPlatformForEmbedded/libwpe/releases/download/\($tag)/libwpe-\($version).tar.xz"'
-  - name: wpebackend-fdo
-    buildsystem: meson
-    builddir: true
-    config-opts:
-      - --buildtype=plain
-    sources:
-      - type: archive
-        url: https://github.com/Igalia/WPEBackend-fdo/releases/download/1.14.3/wpebackend-fdo-1.14.3.tar.xz
-        sha256: 10121842595a850291db3e82f3db0b9984df079022d386ce42c2b8508159dc6c
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/Igalia/WPEBackend-fdo/releases/latest
-          tag-query: .tag_name
-          timestamp-query: .published_at
-          version-query: $tag
-          url-query: '"https://github.com/Igalia/WPEBackend-fdo/releases/download/\($tag)/wpebackend-fdo-\($version).tar.xz"'
+ 
