@@ -62,6 +62,19 @@ modules:
       - type: archive
         url: https://invisible-island.net/archives/xterm/xterm-396.tgz
         sha256: 43f94b6d0eecb4219a99f46352e746f2ab5558e40d922d411acff96cc778a6a5
+    
+  - name: cppcheck
+    buildsystem: cmake-ninja
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/applications
+      - /share/man
+      - '*.a'
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.16/cppcheck-2.16.0.tar.gz
+        sha256: f1a97c8cef5ee9d0abb57e9244549d4fe18d4ecac80cf82e250d1fc5f38b1501
         
   - shared-modules/intltool/intltool-0.51.json
 
