@@ -31,22 +31,26 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://www.geany.org/uploads/Gallery/geany_main.png</image>
+      <image>https://bztd.github.io/Flathub/GEANY/Init.png</image>
     </screenshot>
     <screenshot>
-      <image>https://www.geany.org/uploads/Gallery/geany_build.png</image>
+      <image>https://bztd.github.io/Flathub/GEANY/Dpurar.png</image>
     </screenshot>
     <screenshot>
-      <image>https://www.geany.org/uploads/Gallery/geany_vte.png</image>
+      <image>https://bztd.github.io/Flathub/GEANY/Md.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://bztd.github.io/Flathub/GEANY/Web.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://bztd.github.io/Flathub/GEANY/Latex.png</image>
     </screenshot>
   </screenshots>
-  <update_contact>https://github.com/geany/geany</update_contact>
   <translation type="gettext">geany</translation>
   <releases>
-    <release version="2.1" date="2025-07-06"/>
+    <release version="2.1.0" date="2025-07-06"/>
     <release version="2.0" date="2023-10-19"/>
     <release version="1.38" date="2021-10-09"/>
-    <release date="2020-11-08" version="1.37.1"/>
   </releases>
   <content_rating type="oars-1.1"/>
 </component>
