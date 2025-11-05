@@ -60,8 +60,8 @@ modules:
       - --disable-full-tgetent
     sources:
       - type: archive
-        url: https://invisible-island.net/archives/xterm/xterm-396.tgz
-        sha256: 43f94b6d0eecb4219a99f46352e746f2ab5558e40d922d411acff96cc778a6a5
+        url: https://invisible-island.net/archives/xterm/xterm-403.tgz
+        sha256: 1331b0df5919cb243ffe326dc6ff10a291e683a262f70cdf964a664be733ad83
     
   - name: cppcheck
     buildsystem: cmake-ninja
