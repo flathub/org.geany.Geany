@@ -36,4 +36,12 @@ modules:
         sha256: 43ce0f02ecdcdc723b2475575563ddb192e988c886d368260bc0a63aee3ac400
       - type: patch
         path: patch/19.patch
+  - name: ruby
+    no-autogen: true
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.7.tar.gz
+        sha256: 23815a6d095696f7919090fdc3e2f9459b2c83d57224b2e446ce1f5f7333ef36
  
