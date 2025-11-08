@@ -132,12 +132,13 @@ modules:
       - -Deditor_title=Geany
       - -Dprogram_name=geany
       - -Dfirst_run_template=ide-first-run.txt
-      - -Dsdk_version=24.08
+      - -Dsdk_version=25.08
     sources:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
         commit: d581fd9b873acbf6fb22899aa388435f6c00f61a
       - type: file
         path: wrapper/ide-first-run.txt
-
+        
+  - webkitgtk.yml  # geany-plugins
   - geany-plugins.yml
