@@ -73,8 +73,8 @@ modules:
       - '*.a'
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.16/cppcheck-2.16.0.tar.gz
-        sha256: f1a97c8cef5ee9d0abb57e9244549d4fe18d4ecac80cf82e250d1fc5f38b1501
+        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.18/cppcheck-2.18.0.tar.gz
+        sha256: dc74e300ac59f2ef9f9c05c21d48ae4c8dd1ce17f08914dd30c738ff482e748f
         
   - shared-modules/intltool/intltool-0.51.json
 
