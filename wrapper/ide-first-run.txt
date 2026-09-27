@@ -6,6 +6,7 @@
 Please open issues under: https://github.com/flathub/org.geany.Geany/issues
 
 
+--------------------------------------------------------------
 System Access
 --------------------------------------------------------------
 
@@ -19,6 +20,7 @@ To enable or disable that feature,
 Edit -> Preferences -> General -> Miscellaneous -> Use platform-native file dialogs.
 
 
+--------------------------------------------------------------
 WORKING WITH THE SDK AND ITS EXTENSIONS
 --------------------------------------------------------------
 
@@ -54,6 +56,7 @@ You can use
 to find others.
 
 
+--------------------------------------------------------------
 Using the Code::Blocks plugin
 --------------------------------------------------------------
 
@@ -82,6 +85,17 @@ They are installed in /app/tools/devtools with the structure:
 |   └── SFML2
         ├── cmake
         └── pkgconfig
+
+
+--------------------------------------------------------------------------
+What can I do if the library or tool my project needs is not available?
+--------------------------------------------------------------------------
+Unfortunately, if it is not found among the previously mentioned resources, the only
+option is to manually build that resource within the isolated environment using the 
+SDK tools and configure the container's environment variables. It is also possible to  
+build a custom extension named `org.geany.Geany.Plugin.NAME`, which should 
+mount automatically when Geany starts (though even in this case, configuring 
+environment variables will likely still be necessary).
 
 
 Maintainers
