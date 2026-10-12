@@ -42,6 +42,6 @@ modules:
       - '*'
     sources:
       - type: archive
-        url: https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.7.tar.gz
-        sha256: 23815a6d095696f7919090fdc3e2f9459b2c83d57224b2e446ce1f5f7333ef36
- 
+        url: https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.7.tar.gz
+        sha256: 911ace20f90d068ca0e4dda6d0e4f0f81e52e52f2dd4f4004c721e253412e82d
+          
