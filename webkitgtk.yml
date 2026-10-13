@@ -37,7 +37,6 @@ modules:
       - type: patch
         path: patch/19.patch
   - name: ruby
-    no-autogen: true
     cleanup:
       - '*'
     sources:
