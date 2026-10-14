@@ -36,6 +36,14 @@ modules:
         sha256: 43ce0f02ecdcdc723b2475575563ddb192e988c886d368260bc0a63aee3ac400
       - type: patch
         path: patch/19.patch
+  - name: libyaml #ruby
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz
+        sha256: c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
+    cleanup:
+      - '*'
   - name: ruby
     cleanup:
       - '*'
