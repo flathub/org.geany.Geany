@@ -19,8 +19,8 @@ config-opts:
   - -DENABLE_SPELLCHECK=OFF
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.48.4.tar.xz
-    sha256: f62c1077d3a0f63d50259a802d1143be5d4d0c7c4c05e581819af1ce935afab3
+    url: https://webkitgtk.org/releases/webkitgtk-2.54.1.tar.xz
+    sha256: ea0bbb02dbdbc596874a4e7ad35b66645b3e0a232bd0e4081de5ed92eb0a397d
     
 modules:
 
@@ -36,12 +36,19 @@ modules:
         sha256: 43ce0f02ecdcdc723b2475575563ddb192e988c886d368260bc0a63aee3ac400
       - type: patch
         path: patch/19.patch
+  - name: libyaml #ruby
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz
+        sha256: c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
+    cleanup:
+      - '*'
   - name: ruby
-    no-autogen: true
     cleanup:
       - '*'
     sources:
       - type: archive
-        url: https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.7.tar.gz
-        sha256: 23815a6d095696f7919090fdc3e2f9459b2c83d57224b2e446ce1f5f7333ef36
- 
+        url: https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.7.tar.gz
+        sha256: 911ace20f90d068ca0e4dda6d0e4f0f81e52e52f2dd4f4004c721e253412e82d
+          
