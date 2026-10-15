@@ -19,8 +19,8 @@ config-opts:
   - -DENABLE_SPELLCHECK=OFF
 sources:
   - type: archive
-    url: https://webkitgtk.org/releases/webkitgtk-2.48.4.tar.xz
-    sha256: f62c1077d3a0f63d50259a802d1143be5d4d0c7c4c05e581819af1ce935afab3
+    url: https://webkitgtk.org/releases/webkitgtk-2.54.1.tar.xz
+    sha256: ea0bbb02dbdbc596874a4e7ad35b66645b3e0a232bd0e4081de5ed92eb0a397d
     
 modules:
 
