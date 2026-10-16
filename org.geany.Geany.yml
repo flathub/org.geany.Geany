@@ -1,7 +1,7 @@
 app-id: org.geany.Geany
-runtime: org.freedesktop.Sdk
-runtime-version: '25.08'
-sdk: org.freedesktop.Sdk
+runtime: org.gnome.Sdk
+runtime-version: '51'
+sdk: org.gnome.Sdk
 
 command: geany
 rename-icon: geany
@@ -140,5 +140,4 @@ modules:
       - type: file
         path: wrapper/ide-first-run.txt
         
-  - webkitgtk.yml  # geany-plugins
   - geany-plugins.yml
