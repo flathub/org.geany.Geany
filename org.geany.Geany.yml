@@ -140,5 +140,4 @@ modules:
       - type: file
         path: wrapper/ide-first-run.txt
         
-  - webkitgtk.yml  # geany-plugins
   - geany-plugins.yml
